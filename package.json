@@ -1,0 +1,23 @@
+{
+  "name": "gmc-nodejs",
+  "version": "1.0.0",
+  "description": "test projet ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laaziri-Abdo/GMC-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Laaziri-Abdo/GMC-nodejs/issues"
+  },
+  "homepage": "https://github.com/Laaziri-Abdo/GMC-nodejs#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3"
+  }
+}
