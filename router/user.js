@@ -1,6 +1,43 @@
 const express = require('express'); // inport express
 const router = express.Router();
 const User = require('../module/users')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+// register
+router.post('/register', (req, res) => {
+    data = req.body
+    user = new User(data)
+    cryptPass = bcrypt.hashSync(data.password, (10))
+    user.password = cryptPass;
+    user.save()
+        .then((saved) => {
+            res.status(200).send(saved);
+        })
+        .catch((err) => { res.status(400).send(err) })
+})
+// login
+router.post('/login', async (req, res) => {
+    data = req.body
+    user = await User.findOne({ email: data.email })
+    if (!user) {
+        res.status(404).send('email  invalid !!!!')
+    }
+    else {
+        validPass = bcrypt.compareSync(data.password, user.password)
+        if (!validPass) {
+            res.status(401).send(' password invalid !');
+        }
+        else {
+            payload = {
+                _id: user.id,
+                email: user.email,
+                name: user.name
+            }
+            token = jwt.sign(payload, '123456789')
+            res.status(200).send({ mytoken: token })
+        }
+    }
+})
 //add users 
 router.post('/add', (req, res) => {
     data = req.body
